@@ -1,0 +1,105 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+.wrapper{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+}
+.container-1{
+  background-color: #4776c7;
+  text-align: center;
+  padding: 4em;
+}
+.container-1 h3{
+  font-size: 2.5em;
+  color: white;
+  font-weight: 300;
+  margin-top: 1em;
+  padding: 4px;
+}
+.container-1 hr{
+  width: 50%;
+  margin: 0 auto;
+  
+}
+.container-1 p{
+  font-size: 1.4em;
+  color: white;
+  font-weight: 200;
+}
+.left-logo {
+  width: 65%;
+  height: 65%;
+  margin: 0 auto;
+
+}
+.joinOuterContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.joinInnerContainer {
+  width: 70%;
+}
+
+.joinInput {
+  border: none;
+  
+  border-bottom: 1px solid #4b81dd;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.heading {
+  color: #484c52;
+  font-size: 2.5em;
+  padding-bottom: 5px;
+  /* border-bottom: 2px solid rgb(48, 48, 48); */
+}
+
+.button {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #37393b;
+    padding: 20px;
+    border-radius: 8px;
+    display: inline-block;
+    border: none;
+    width: 100%;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .joinOuterContainer {
+    height: 100%;
+  }
+
+  .joinInnerContainer {
+    width: 90%;
+  }
+
+
+}
+
+button:focus {
+  outline: 0;
+}
