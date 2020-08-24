@@ -64,7 +64,10 @@ html, body {
   padding: 15px 20px;
   width: 100%;
 }
-
+.checkbox-label {
+  color: #484c52;
+  font-size: 0.8em;
+}
 .heading {
   color: #484c52;
   font-size: 2.5em;

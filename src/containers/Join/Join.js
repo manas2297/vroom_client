@@ -1,13 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import './Join.css';
 import { ReactComponent as ReactLogo } from '../../icons/back2.svg'
+import axios from 'axios';
+import './Join.css';
+import CheckBox from '../../components/CheckBox';
 import rules from '../../utils/validationRules';
+import { Grid } from '@material-ui/core';
 const Join = (props) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
+  const [privateRoom, setPrivate] = useState(false);
+  const [roomDetails, setRoomDetails] = useState(null);
   const validateForm = (e) => {
     return rules[e.target.name].regex.test(e.target.value);
+  }
+  useEffect(() => {
+    if(roomDetails) {
+      props.history.push({
+        pathname: '/chat',
+        state:{
+          room: roomDetails.roomName,
+          name: roomDetails.roomName,
+          roomId: roomDetails.roomID,
+        }
+      })
+    }
+  }, [roomDetails])
+  const createRoom = async () => {
+    if(name && room) {
+      const payload = {
+        roomName: room,
+        userName: name,
+        privateRoom,
+      };
+      const roomDetails = await axios.post('http://localhost:5000/room/createRoom', payload);
+      setRoomDetails(roomDetails.data);
+    }
   }
   return (
     <div className="wrapper">
@@ -51,17 +79,27 @@ const Join = (props) => {
                 value={room}
               />
             </div>
-            {/* <Link onClick={(e)=>(!name && !room)? e.preventDefault(): null} to={`/chat?name=${name}&room=${room}`}> */}
+            <Grid 
+              container 
+              spacing={1}
+              justify="flex-start"
+              alignItems="center"
+            >
+              <Grid item> 
+                <CheckBox 
+                color="primary"
+                onChange={(e) => {
+                  setPrivate(e.target.checked);
+                }} 
+                checked={privateRoom}/>
+              </Grid>
+              <Grid item className="checkbox-label">
+                Private Room
+              </Grid>
+            </Grid>
             <button 
               onClick={()=> {
-                if(name && room)
-                props.history.push({
-                  pathname: '/chat',
-                  state: {
-                    name,
-                    room,
-                  }
-                })
+                createRoom();
               }}
               className="button mt-20" 
               type="submit"
