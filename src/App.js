@@ -6,7 +6,7 @@ import './App.css'
 const App = () => (
   <Router>
     <Route exact path="/" exact component={Join}/>
-    <Route  exact path="/chat" component={Chat}/>
+    <Route  exact path="/chat/:roomId" component={Chat}/>
   </Router>
 );
 

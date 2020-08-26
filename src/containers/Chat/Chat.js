@@ -13,33 +13,33 @@ const Chat = (props) => {
     location
   } = props;
   console.log(location);
-  
   const [name, setName] = useState(location.state.name);
   const [room, setRoom] = useState(location.state.room);
+  const [roomId, setRoomId] = useState(props.match.params.roomId);
   const [message, setMessage] = useState('');
   const [users, setUsers] = useState('');
   const [messages, setMessages] = useState([]);
-  const ENDPOINT = 'https://localhost:5000/';
-  // useEffect(()=> {
-  //   const {name, room} = queryString.parse(location.search);
-  //   socket = io(ENDPOINT);
-  //   setName(name);
-  //   setRoom(room);
-  //   socket.emit('join',{name, room},()=>{});
-  //   return () => {
-  //     socket.emit('disconnect');
-  //     socket.off();
-  //   }
-  // }, [ENDPOINT, location.search, props.location]);
+  const ENDPOINT = 'http://localhost:5000';
+  useEffect(()=> {
+    socket = io.connect(ENDPOINT);
+    socket.emit('join',{name, room, roomId},()=>{});
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
+  }, [ENDPOINT, location]);
 
-  // useEffect(() => {
-  //   socket.on('message', (message) => {
-  //     setMessages([...messages, message])
-  //   });
+  useEffect(() => {
+    socket.on('message', (message) => {
+      console.log(message);
+    });
+    socket.on('allUsers', (data) => {
+      console.log(data);
+    })
   //   socket.on("roomData", ({ users }) => {
   //     setUsers(users);
   //   });
-  // },[]);
+  },[]);
   
   const sendMesssage = (event) => {
     event.preventDefault();

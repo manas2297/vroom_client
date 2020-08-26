@@ -17,10 +17,10 @@ const Join = (props) => {
   useEffect(() => {
     if(roomDetails) {
       props.history.push({
-        pathname: '/chat',
+        pathname: `chat/${roomDetails.roomID}`,
         state:{
           room: roomDetails.roomName,
-          name: roomDetails.roomName,
+          name: roomDetails.userName,
           roomId: roomDetails.roomID,
         }
       })
@@ -52,7 +52,7 @@ const Join = (props) => {
       <div className="container-2">
         <div className="joinOuterContainer">
           <div className="joinInnerContainer">
-            <h1 className="heading">Join</h1>
+            <h1 className="heading">Start Meeting</h1>
             <div>
               <input 
                 placeholder="Enter Name" 
